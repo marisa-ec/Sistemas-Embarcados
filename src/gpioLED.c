@@ -278,7 +278,7 @@ void acender_display(int andar)
 	for (i = 0; i < 7; ++i)
 	{
 		GPIOPinWrite( GPIO_INSTANCE_ADDRESS,
-            GPIO_INSTANCE_PIN_NUMBER( display[andar] ),
+            GPIO_INSTANCE_PIN_NUMBER( display[i] ),
             numeros[andar][i] );
 	}
 }
