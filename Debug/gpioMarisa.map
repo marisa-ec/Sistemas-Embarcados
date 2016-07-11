@@ -22,7 +22,9 @@ lib/Debug/libsystem_config.a(cpu.o)
 Allocating common symbols
 Common symbol       size              file
 
+andar_atual         0x4               Debug/gpioLED.o
 fnRAMVectors        0x200             lib/Debug/libsystem_config.a(interrupt.o)
+destino             0x4               Debug/gpioLED.o
 
 Discarded input sections
 
@@ -31,8 +33,6 @@ Discarded input sections
  .bss           0x0000000000000000        0x0 Debug/gpioLED.o
  .bss.flagToggle
                 0x0000000000000000        0x4 Debug/gpioLED.o
- .text.ledToggle
-                0x0000000000000000       0x90 Debug/gpioLED.o
  .text          0x0000000000000000        0x0 Debug/gpioLEDBlink.o
  .data          0x0000000000000000        0x0 Debug/gpioLEDBlink.o
  .bss           0x0000000000000000        0x0 Debug/gpioLEDBlink.o
@@ -166,7 +166,7 @@ LOAD lib/Debug/libsystem_config.a
  .text          0x0000000080000000       0xb4 lib/Debug/libsystem_config.a(init.o)
                 0x0000000080000000                Entry
 
-.text           0x00000000800000b4      0xea0
+.text           0x00000000800000b4     0x11c0
                 0x00000000800000b4                . = ALIGN (0x4)
  *(.text*)
  .text.GPIO1_ModuleClkConfig
@@ -175,200 +175,224 @@ LOAD lib/Debug/libsystem_config.a
                 0x0000000080000100       0xac Debug/gpioLED.o
  .text.GPIOModuleEnable
                 0x00000000800001ac       0x38 Debug/gpioLED.o
- .text.GPIOModuleReset
-                0x00000000800001e4       0x38 Debug/gpioLED.o
  .text.GPIODirModeSet
-                0x000000008000021c       0x88 Debug/gpioLED.o
+                0x00000000800001e4       0x88 Debug/gpioLED.o
  .text.GPIOPinWrite
-                0x00000000800002a4       0x64 Debug/gpioLED.o
-                0x00000000800002a4                GPIOPinWrite
- .text.ledInit  0x0000000080000308      0x244 Debug/gpioLED.o
-                0x0000000080000308                ledInit
- .text.main     0x000000008000054c       0xac Debug/gpioLEDBlink.o
-                0x000000008000054c                main
- .text.Delay    0x00000000800005f8       0x38 Debug/gpioLEDBlink.o
+                0x000000008000026c       0x64 Debug/gpioLED.o
+                0x000000008000026c                GPIOPinWrite
+ .text.ledInit  0x00000000800002d0      0x230 Debug/gpioLED.o
+                0x00000000800002d0                ledInit
+ .text.acender  0x0000000080000500       0x54 Debug/gpioLED.o
+                0x0000000080000500                acender
+ .text.apagar   0x0000000080000554       0x54 Debug/gpioLED.o
+                0x0000000080000554                apagar
  .text.valorbot
-                0x0000000080000630       0x5c Debug/gpioLEDBlink.o
-                0x0000000080000630                valorbot
+                0x00000000800005a8       0x50 Debug/gpioLED.o
+                0x00000000800005a8                valorbot
+ .text.sinal    0x00000000800005f8       0x74 Debug/gpioLED.o
+                0x00000000800005f8                sinal
+ .text.acender_display
+                0x000000008000066c       0xa0 Debug/gpioLED.o
+                0x000000008000066c                acender_display
+ .text.delay    0x000000008000070c       0x38 Debug/gpioLED.o
+ .text.init     0x0000000080000744      0x114 Debug/gpioLED.o
+                0x0000000080000744                init
+ .text.exec     0x0000000080000858      0x134 Debug/gpioLED.o
+                0x0000000080000858                exec
+ .text.main     0x000000008000098c       0x20 Debug/gpioLEDBlink.o
+                0x000000008000098c                main
  .text.start_boot
-                0x000000008000068c       0x24 lib/Debug/libsystem_config.a(startup.o)
-                0x000000008000068c                start_boot
+                0x00000000800009ac       0x24 lib/Debug/libsystem_config.a(startup.o)
+                0x00000000800009ac                start_boot
  .text.CopyVectorTable
-                0x00000000800006b0       0x94 lib/Debug/libsystem_config.a(startup.o)
- .text          0x0000000080000744      0x488 lib/Debug/libsystem_config.a(cp15.o)
-                0x0000000080000744                CP15ICacheDisable
-                0x0000000080000760                CP15DCacheDisable
-                0x000000008000077c                CP15ICacheEnable
-                0x000000008000078c                CP15DCacheEnable
-                0x000000008000079c                CP15DCacheFlush
-                0x0000000080000830                CP15DCacheClean
-                0x00000000800008c4                CP15DCacheCleanFlush
-                0x0000000080000958                CP15ICacheFlush
-                0x0000000080000968                CP15DCacheCleanBuff
-                0x00000000800009bc                CP15DCacheCleanFlushBuff
-                0x0000000080000a10                CP15DCacheFlushBuff
-                0x0000000080000a74                CP15ICacheFlushBuff
-                0x0000000080000ac8                CP15Ttb0Set
-                0x0000000080000ad4                CP15TlbInvalidate
-                0x0000000080000ae0                CP15MMUDisable
-                0x0000000080000af8                CP15MMUEnable
-                0x0000000080000b0c                CP15VectorBaseAddrSet
-                0x0000000080000b18                CP15BranchPredictorInvalidate
-                0x0000000080000b24                CP15BranchPredictionEnable
-                0x0000000080000b34                CP15BranchPredictionDisable
-                0x0000000080000b44                CP15DomainAccessClientSet
-                0x0000000080000b54                CP15ControlFeatureDisable
-                0x0000000080000b68                CP15ControlFeatureEnable
-                0x0000000080000b7c                CP15TtbCtlTtb0Config
-                0x0000000080000b8c                CP15AuxControlFeatureEnable
-                0x0000000080000ba0                CP15AuxControlFeatureDisable
-                0x0000000080000bb4                CP15MainIdPrimPartNumGet
- .text          0x0000000080000bcc       0xf0 lib/Debug/libsystem_config.a(exceptionhandler.o)
-                0x0000000080000bcc                SVC_Handler
-                0x0000000080000bf4                IRQHandler
-                0x0000000080000ca0                FIQHandler
-                0x0000000080000ca4                UndefInstHandler
-                0x0000000080000ca4                AbortHandler
- .text          0x0000000080000cbc      0x114 /usr/lib/gcc/arm-none-eabi/4.8//libgcc.a(_udivsi3.o)
-                0x0000000080000cbc                __udivsi3
-                0x0000000080000cbc                __aeabi_uidiv
-                0x0000000080000db0                __aeabi_uidivmod
- .text          0x0000000080000dd0      0x148 /usr/lib/gcc/arm-none-eabi/4.8//libgcc.a(_divsi3.o)
-                0x0000000080000dd0                __aeabi_idiv
-                0x0000000080000dd0                __divsi3
-                0x0000000080000ef8                __aeabi_idivmod
- .text          0x0000000080000f18        0x4 /usr/lib/gcc/arm-none-eabi/4.8//libgcc.a(_dvmd_tls.o)
-                0x0000000080000f18                __aeabi_ldiv0
-                0x0000000080000f18                __aeabi_idiv0
+                0x00000000800009d0       0x94 lib/Debug/libsystem_config.a(startup.o)
+ .text          0x0000000080000a64      0x488 lib/Debug/libsystem_config.a(cp15.o)
+                0x0000000080000a64                CP15ICacheDisable
+                0x0000000080000a80                CP15DCacheDisable
+                0x0000000080000a9c                CP15ICacheEnable
+                0x0000000080000aac                CP15DCacheEnable
+                0x0000000080000abc                CP15DCacheFlush
+                0x0000000080000b50                CP15DCacheClean
+                0x0000000080000be4                CP15DCacheCleanFlush
+                0x0000000080000c78                CP15ICacheFlush
+                0x0000000080000c88                CP15DCacheCleanBuff
+                0x0000000080000cdc                CP15DCacheCleanFlushBuff
+                0x0000000080000d30                CP15DCacheFlushBuff
+                0x0000000080000d94                CP15ICacheFlushBuff
+                0x0000000080000de8                CP15Ttb0Set
+                0x0000000080000df4                CP15TlbInvalidate
+                0x0000000080000e00                CP15MMUDisable
+                0x0000000080000e18                CP15MMUEnable
+                0x0000000080000e2c                CP15VectorBaseAddrSet
+                0x0000000080000e38                CP15BranchPredictorInvalidate
+                0x0000000080000e44                CP15BranchPredictionEnable
+                0x0000000080000e54                CP15BranchPredictionDisable
+                0x0000000080000e64                CP15DomainAccessClientSet
+                0x0000000080000e74                CP15ControlFeatureDisable
+                0x0000000080000e88                CP15ControlFeatureEnable
+                0x0000000080000e9c                CP15TtbCtlTtb0Config
+                0x0000000080000eac                CP15AuxControlFeatureEnable
+                0x0000000080000ec0                CP15AuxControlFeatureDisable
+                0x0000000080000ed4                CP15MainIdPrimPartNumGet
+ .text          0x0000000080000eec       0xf0 lib/Debug/libsystem_config.a(exceptionhandler.o)
+                0x0000000080000eec                SVC_Handler
+                0x0000000080000f14                IRQHandler
+                0x0000000080000fc0                FIQHandler
+                0x0000000080000fc4                UndefInstHandler
+                0x0000000080000fc4                AbortHandler
+ .text          0x0000000080000fdc      0x114 /usr/lib/gcc/arm-none-eabi/4.8//libgcc.a(_udivsi3.o)
+                0x0000000080000fdc                __udivsi3
+                0x0000000080000fdc                __aeabi_uidiv
+                0x00000000800010d0                __aeabi_uidivmod
+ .text          0x00000000800010f0      0x148 /usr/lib/gcc/arm-none-eabi/4.8//libgcc.a(_divsi3.o)
+                0x00000000800010f0                __aeabi_idiv
+                0x00000000800010f0                __divsi3
+                0x0000000080001218                __aeabi_idivmod
+ .text          0x0000000080001238        0x4 /usr/lib/gcc/arm-none-eabi/4.8//libgcc.a(_dvmd_tls.o)
+                0x0000000080001238                __aeabi_ldiv0
+                0x0000000080001238                __aeabi_idiv0
  *(.rodata*)
  .rodata.vecTbl
-                0x0000000080000f1c       0x38 lib/Debug/libsystem_config.a(startup.o)
+                0x000000008000123c       0x38 lib/Debug/libsystem_config.a(startup.o)
 
-.glue_7         0x0000000080000f54        0x0
- .glue_7        0x0000000080000f54        0x0 linker stubs
+.glue_7         0x0000000080001274        0x0
+ .glue_7        0x0000000080001274        0x0 linker stubs
 
-.glue_7t        0x0000000080000f54        0x0
- .glue_7t       0x0000000080000f54        0x0 linker stubs
+.glue_7t        0x0000000080001274        0x0
+ .glue_7t       0x0000000080001274        0x0 linker stubs
 
-.vfp11_veneer   0x0000000080000f54        0x0
- .vfp11_veneer  0x0000000080000f54        0x0 linker stubs
+.vfp11_veneer   0x0000000080001274        0x0
+ .vfp11_veneer  0x0000000080001274        0x0 linker stubs
 
-.v4_bx          0x0000000080000f54        0x0
- .v4_bx         0x0000000080000f54        0x0 linker stubs
+.v4_bx          0x0000000080001274        0x0
+ .v4_bx         0x0000000080001274        0x0 linker stubs
 
-.iplt           0x0000000080000f54        0x0
- .iplt          0x0000000080000f54        0x0 Debug/gpioLED.o
+.iplt           0x0000000080001274        0x0
+ .iplt          0x0000000080001274        0x0 Debug/gpioLED.o
 
-.rel.dyn        0x0000000080000f54        0x0
- .rel.iplt      0x0000000080000f54        0x0 Debug/gpioLED.o
+.rel.dyn        0x0000000080001274        0x0
+ .rel.iplt      0x0000000080001274        0x0 Debug/gpioLED.o
 
-.data           0x0000000080000f54        0x0
-                0x0000000080000f54                . = ALIGN (0x4)
+.data           0x0000000080001274       0x88
+                0x0000000080001274                . = ALIGN (0x4)
  *(.data*)
+ .data.botao    0x0000000080001274        0xc Debug/gpioLED.o
+                0x0000000080001274                botao
+ .data.elevador
+                0x0000000080001280        0xc Debug/gpioLED.o
+                0x0000000080001280                elevador
+ .data.display  0x000000008000128c       0x1c Debug/gpioLED.o
+                0x000000008000128c                display
+ .data.numeros  0x00000000800012a8       0x54 Debug/gpioLED.o
+                0x00000000800012a8                numeros
 
-.igot.plt       0x0000000080000f54        0x0
- .igot.plt      0x0000000080000f54        0x0 Debug/gpioLED.o
+.igot.plt       0x00000000800012fc        0x0
+ .igot.plt      0x00000000800012fc        0x0 Debug/gpioLED.o
 
-.bss            0x0000000080000f54      0x200
-                0x0000000080000f54                . = ALIGN (0x4)
-                0x0000000080000f54                _bss_start = .
+.bss            0x00000000800012fc      0x208
+                0x00000000800012fc                . = ALIGN (0x4)
+                0x00000000800012fc                _bss_start = .
  *(.bss*)
  *(COMMON)
- COMMON         0x0000000080000f54      0x200 lib/Debug/libsystem_config.a(interrupt.o)
-                0x0000000080000f54                fnRAMVectors
-                0x0000000080001154                _bss_end = .
+ COMMON         0x00000000800012fc        0x8 Debug/gpioLED.o
+                0x00000000800012fc                andar_atual
+                0x0000000080001300                destino
+ COMMON         0x0000000080001304      0x200 lib/Debug/libsystem_config.a(interrupt.o)
+                0x0000000080001304                fnRAMVectors
+                0x0000000080001504                _bss_end = .
 
-.heap           0x0000000080001154      0x800
-                0x0000000080001154                . = ALIGN (0x4)
-                0x0000000080001154                __end__ = .
-                0x0000000080001154                end = __end__
-                0x0000000080001154                __HeapBase = __end__
+.heap           0x0000000080001504      0x800
+                0x0000000080001504                . = ALIGN (0x4)
+                0x0000000080001504                __end__ = .
+                0x0000000080001504                end = __end__
+                0x0000000080001504                __HeapBase = __end__
  *(.heap*)
-                0x0000000080001954                . = (. + 0x800)
- *fill*         0x0000000080001154      0x800 
-                0x0000000080001954                __HeapLimit = .
+                0x0000000080001d04                . = (. + 0x800)
+ *fill*         0x0000000080001504      0x800 
+                0x0000000080001d04                __HeapLimit = .
 
-.stack          0x0000000080001954  0x7fffff8
-                0x0000000080001954                . = ALIGN (0x4)
-                0x0000000080001954                __StackLimit = .
+.stack          0x0000000080001d04  0x7fffff8
+                0x0000000080001d04                . = ALIGN (0x4)
+                0x0000000080001d04                __StackLimit = .
  *(.stack*)
-                0x000000008800194c                . = (. + 0x7fffff8)
- *fill*         0x0000000080001954  0x7fffff8 
-                0x000000008800194c                __StackTop = .
-                0x000000008800194c                _stack = __StackTop
+                0x0000000088001cfc                . = (. + 0x7fffff8)
+ *fill*         0x0000000080001d04  0x7fffff8 
+                0x0000000088001cfc                __StackTop = .
+                0x0000000088001cfc                _stack = __StackTop
 OUTPUT(Debug/gpioMarisa.out elf32-littlearm)
 
-.debug_info     0x0000000000000000      0xbc5
- .debug_info    0x0000000000000000      0x291 Debug/gpioLED.o
- .debug_info    0x0000000000000291       0xdb Debug/gpioLEDBlink.o
- .debug_info    0x000000000000036c       0x9f lib/Debug/libsystem_config.a(init.o)
- .debug_info    0x000000000000040b       0xd2 lib/Debug/libsystem_config.a(startup.o)
- .debug_info    0x00000000000004dd       0x9f lib/Debug/libsystem_config.a(cp15.o)
- .debug_info    0x000000000000057c       0xb2 lib/Debug/libsystem_config.a(exceptionhandler.o)
- .debug_info    0x000000000000062e      0x3cf lib/Debug/libsystem_config.a(interrupt.o)
- .debug_info    0x00000000000009fd       0x98 /usr/lib/gcc/arm-none-eabi/4.8//libgcc.a(_udivsi3.o)
- .debug_info    0x0000000000000a95       0x98 /usr/lib/gcc/arm-none-eabi/4.8//libgcc.a(_divsi3.o)
- .debug_info    0x0000000000000b2d       0x98 /usr/lib/gcc/arm-none-eabi/4.8//libgcc.a(_dvmd_tls.o)
+.debug_info     0x0000000000000000      0xcc1
+ .debug_info    0x0000000000000000      0x411 Debug/gpioLED.o
+ .debug_info    0x0000000000000411       0x57 Debug/gpioLEDBlink.o
+ .debug_info    0x0000000000000468       0x9f lib/Debug/libsystem_config.a(init.o)
+ .debug_info    0x0000000000000507       0xd2 lib/Debug/libsystem_config.a(startup.o)
+ .debug_info    0x00000000000005d9       0x9f lib/Debug/libsystem_config.a(cp15.o)
+ .debug_info    0x0000000000000678       0xb2 lib/Debug/libsystem_config.a(exceptionhandler.o)
+ .debug_info    0x000000000000072a      0x3cf lib/Debug/libsystem_config.a(interrupt.o)
+ .debug_info    0x0000000000000af9       0x98 /usr/lib/gcc/arm-none-eabi/4.8//libgcc.a(_udivsi3.o)
+ .debug_info    0x0000000000000b91       0x98 /usr/lib/gcc/arm-none-eabi/4.8//libgcc.a(_divsi3.o)
+ .debug_info    0x0000000000000c29       0x98 /usr/lib/gcc/arm-none-eabi/4.8//libgcc.a(_dvmd_tls.o)
 
-.debug_abbrev   0x0000000000000000      0x48d
- .debug_abbrev  0x0000000000000000       0xfe Debug/gpioLED.o
- .debug_abbrev  0x00000000000000fe       0xb5 Debug/gpioLEDBlink.o
- .debug_abbrev  0x00000000000001b3       0x14 lib/Debug/libsystem_config.a(init.o)
- .debug_abbrev  0x00000000000001c7       0xa2 lib/Debug/libsystem_config.a(startup.o)
- .debug_abbrev  0x0000000000000269       0x14 lib/Debug/libsystem_config.a(cp15.o)
- .debug_abbrev  0x000000000000027d       0x14 lib/Debug/libsystem_config.a(exceptionhandler.o)
- .debug_abbrev  0x0000000000000291      0x1c0 lib/Debug/libsystem_config.a(interrupt.o)
- .debug_abbrev  0x0000000000000451       0x14 /usr/lib/gcc/arm-none-eabi/4.8//libgcc.a(_udivsi3.o)
- .debug_abbrev  0x0000000000000465       0x14 /usr/lib/gcc/arm-none-eabi/4.8//libgcc.a(_divsi3.o)
- .debug_abbrev  0x0000000000000479       0x14 /usr/lib/gcc/arm-none-eabi/4.8//libgcc.a(_dvmd_tls.o)
+.debug_abbrev   0x0000000000000000      0x4cf
+ .debug_abbrev  0x0000000000000000      0x1b3 Debug/gpioLED.o
+ .debug_abbrev  0x00000000000001b3       0x42 Debug/gpioLEDBlink.o
+ .debug_abbrev  0x00000000000001f5       0x14 lib/Debug/libsystem_config.a(init.o)
+ .debug_abbrev  0x0000000000000209       0xa2 lib/Debug/libsystem_config.a(startup.o)
+ .debug_abbrev  0x00000000000002ab       0x14 lib/Debug/libsystem_config.a(cp15.o)
+ .debug_abbrev  0x00000000000002bf       0x14 lib/Debug/libsystem_config.a(exceptionhandler.o)
+ .debug_abbrev  0x00000000000002d3      0x1c0 lib/Debug/libsystem_config.a(interrupt.o)
+ .debug_abbrev  0x0000000000000493       0x14 /usr/lib/gcc/arm-none-eabi/4.8//libgcc.a(_udivsi3.o)
+ .debug_abbrev  0x00000000000004a7       0x14 /usr/lib/gcc/arm-none-eabi/4.8//libgcc.a(_divsi3.o)
+ .debug_abbrev  0x00000000000004bb       0x14 /usr/lib/gcc/arm-none-eabi/4.8//libgcc.a(_dvmd_tls.o)
 
-.debug_aranges  0x0000000000000000      0x280
+.debug_aranges  0x0000000000000000      0x2a0
  .debug_aranges
-                0x0000000000000000       0x58 Debug/gpioLED.o
+                0x0000000000000000       0x88 Debug/gpioLED.o
  .debug_aranges
-                0x0000000000000058       0x30 Debug/gpioLEDBlink.o
+                0x0000000000000088       0x20 Debug/gpioLEDBlink.o
  .debug_aranges
-                0x0000000000000088       0x20 lib/Debug/libsystem_config.a(init.o)
+                0x00000000000000a8       0x20 lib/Debug/libsystem_config.a(init.o)
  .debug_aranges
-                0x00000000000000a8       0x28 lib/Debug/libsystem_config.a(startup.o)
+                0x00000000000000c8       0x28 lib/Debug/libsystem_config.a(startup.o)
  .debug_aranges
-                0x00000000000000d0       0x20 lib/Debug/libsystem_config.a(cp15.o)
+                0x00000000000000f0       0x20 lib/Debug/libsystem_config.a(cp15.o)
  .debug_aranges
-                0x00000000000000f0       0x20 lib/Debug/libsystem_config.a(exceptionhandler.o)
+                0x0000000000000110       0x20 lib/Debug/libsystem_config.a(exceptionhandler.o)
  .debug_aranges
-                0x0000000000000110      0x110 lib/Debug/libsystem_config.a(interrupt.o)
+                0x0000000000000130      0x110 lib/Debug/libsystem_config.a(interrupt.o)
  .debug_aranges
-                0x0000000000000220       0x20 /usr/lib/gcc/arm-none-eabi/4.8//libgcc.a(_udivsi3.o)
+                0x0000000000000240       0x20 /usr/lib/gcc/arm-none-eabi/4.8//libgcc.a(_udivsi3.o)
  .debug_aranges
-                0x0000000000000240       0x20 /usr/lib/gcc/arm-none-eabi/4.8//libgcc.a(_divsi3.o)
+                0x0000000000000260       0x20 /usr/lib/gcc/arm-none-eabi/4.8//libgcc.a(_divsi3.o)
  .debug_aranges
-                0x0000000000000260       0x20 /usr/lib/gcc/arm-none-eabi/4.8//libgcc.a(_dvmd_tls.o)
+                0x0000000000000280       0x20 /usr/lib/gcc/arm-none-eabi/4.8//libgcc.a(_dvmd_tls.o)
 
-.debug_ranges   0x0000000000000000      0x180
- .debug_ranges  0x0000000000000000       0x48 Debug/gpioLED.o
- .debug_ranges  0x0000000000000048       0x20 Debug/gpioLEDBlink.o
- .debug_ranges  0x0000000000000068       0x18 lib/Debug/libsystem_config.a(startup.o)
- .debug_ranges  0x0000000000000080      0x100 lib/Debug/libsystem_config.a(interrupt.o)
+.debug_ranges   0x0000000000000000      0x1a0
+ .debug_ranges  0x0000000000000000       0x78 Debug/gpioLED.o
+ .debug_ranges  0x0000000000000078       0x10 Debug/gpioLEDBlink.o
+ .debug_ranges  0x0000000000000088       0x18 lib/Debug/libsystem_config.a(startup.o)
+ .debug_ranges  0x00000000000000a0      0x100 lib/Debug/libsystem_config.a(interrupt.o)
 
-.debug_line     0x0000000000000000      0x926
- .debug_line    0x0000000000000000      0x11a Debug/gpioLED.o
- .debug_line    0x000000000000011a       0x80 Debug/gpioLEDBlink.o
- .debug_line    0x000000000000019a       0x8d lib/Debug/libsystem_config.a(init.o)
- .debug_line    0x0000000000000227       0x90 lib/Debug/libsystem_config.a(startup.o)
- .debug_line    0x00000000000002b7      0x184 lib/Debug/libsystem_config.a(cp15.o)
- .debug_line    0x000000000000043b       0xb3 lib/Debug/libsystem_config.a(exceptionhandler.o)
- .debug_line    0x00000000000004ee      0x2b7 lib/Debug/libsystem_config.a(interrupt.o)
- .debug_line    0x00000000000007a5       0x8a /usr/lib/gcc/arm-none-eabi/4.8//libgcc.a(_udivsi3.o)
- .debug_line    0x000000000000082f       0x96 /usr/lib/gcc/arm-none-eabi/4.8//libgcc.a(_divsi3.o)
- .debug_line    0x00000000000008c5       0x61 /usr/lib/gcc/arm-none-eabi/4.8//libgcc.a(_dvmd_tls.o)
+.debug_line     0x0000000000000000      0x9de
+ .debug_line    0x0000000000000000      0x20e Debug/gpioLED.o
+ .debug_line    0x000000000000020e       0x44 Debug/gpioLEDBlink.o
+ .debug_line    0x0000000000000252       0x8d lib/Debug/libsystem_config.a(init.o)
+ .debug_line    0x00000000000002df       0x90 lib/Debug/libsystem_config.a(startup.o)
+ .debug_line    0x000000000000036f      0x184 lib/Debug/libsystem_config.a(cp15.o)
+ .debug_line    0x00000000000004f3       0xb3 lib/Debug/libsystem_config.a(exceptionhandler.o)
+ .debug_line    0x00000000000005a6      0x2b7 lib/Debug/libsystem_config.a(interrupt.o)
+ .debug_line    0x000000000000085d       0x8a /usr/lib/gcc/arm-none-eabi/4.8//libgcc.a(_udivsi3.o)
+ .debug_line    0x00000000000008e7       0x96 /usr/lib/gcc/arm-none-eabi/4.8//libgcc.a(_divsi3.o)
+ .debug_line    0x000000000000097d       0x61 /usr/lib/gcc/arm-none-eabi/4.8//libgcc.a(_dvmd_tls.o)
 
-.debug_str      0x0000000000000000      0x722
- .debug_str     0x0000000000000000      0x28f Debug/gpioLED.o
- .debug_str     0x000000000000028f       0x46 Debug/gpioLEDBlink.o
-                                        0x102 (size before relaxing)
- .debug_str     0x00000000000002d5      0x192 lib/Debug/libsystem_config.a(startup.o)
+.debug_str      0x0000000000000000      0x75e
+ .debug_str     0x0000000000000000      0x2f9 Debug/gpioLED.o
+                                        0x301 (size before relaxing)
+ .debug_str     0x00000000000002f9       0x18 Debug/gpioLEDBlink.o
+                                         0xdd (size before relaxing)
+ .debug_str     0x0000000000000311      0x192 lib/Debug/libsystem_config.a(startup.o)
                                         0x1bc (size before relaxing)
- .debug_str     0x0000000000000467      0x2bb lib/Debug/libsystem_config.a(interrupt.o)
+ .debug_str     0x00000000000004a3      0x2bb lib/Debug/libsystem_config.a(interrupt.o)
                                         0x407 (size before relaxing)
 
 .comment        0x0000000000000000       0x8e
@@ -402,10 +426,10 @@ OUTPUT(Debug/gpioMarisa.out elf32-littlearm)
  .ARM.attributes
                 0x000000000000018f       0x18 /usr/lib/gcc/arm-none-eabi/4.8//libgcc.a(_dvmd_tls.o)
 
-.debug_frame    0x0000000000000000      0x59c
- .debug_frame   0x0000000000000000       0xd8 Debug/gpioLED.o
- .debug_frame   0x00000000000000d8       0x5c Debug/gpioLEDBlink.o
- .debug_frame   0x0000000000000134       0x4c lib/Debug/libsystem_config.a(startup.o)
- .debug_frame   0x0000000000000180      0x3dc lib/Debug/libsystem_config.a(interrupt.o)
- .debug_frame   0x000000000000055c       0x20 /usr/lib/gcc/arm-none-eabi/4.8//libgcc.a(_udivsi3.o)
- .debug_frame   0x000000000000057c       0x20 /usr/lib/gcc/arm-none-eabi/4.8//libgcc.a(_divsi3.o)
+.debug_frame    0x0000000000000000      0x610
+ .debug_frame   0x0000000000000000      0x17c Debug/gpioLED.o
+ .debug_frame   0x000000000000017c       0x2c Debug/gpioLEDBlink.o
+ .debug_frame   0x00000000000001a8       0x4c lib/Debug/libsystem_config.a(startup.o)
+ .debug_frame   0x00000000000001f4      0x3dc lib/Debug/libsystem_config.a(interrupt.o)
+ .debug_frame   0x00000000000005d0       0x20 /usr/lib/gcc/arm-none-eabi/4.8//libgcc.a(_udivsi3.o)
+ .debug_frame   0x00000000000005f0       0x20 /usr/lib/gcc/arm-none-eabi/4.8//libgcc.a(_divsi3.o)

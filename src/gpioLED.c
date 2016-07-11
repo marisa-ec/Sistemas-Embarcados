@@ -17,6 +17,8 @@
  */
 #include "gpioLED.h"
 
+static void delay(volatile unsigned int count);
+
 int flagToggle=0x0;
 int botao[3]      = {BOTAO1, BOTAO2, BOTAO3};
 int elevador[3]   = {ANDAR1, ANDAR2, ANDAR3};
@@ -31,7 +33,8 @@ int numeros[3][7] = { {PIN_LOW, PIN_HIGH, PIN_HIGH, PIN_LOW, PIN_LOW, PIN_LOW, P
 * Comments      : This function enables the L3 and L4_PER interface 
 * clocks. This also enables functional clocks of GPIO1 instance.
 *END*-----------------------------------------------------------*/
-static void GPIO1_ModuleClkConfig(void){
+static void GPIO1_ModuleClkConfig(void)
+{
 
     /* Writing to MODULEMODE field of CM_PER_GPIO1_CLKCTRL register. */
     HWREG(SOC_CM_PER_REGS + CM_PER_GPIO1_CLKCTRL) |=
@@ -61,7 +64,8 @@ static void GPIO1_ModuleClkConfig(void){
 * The 'offsetAddr' and 'padConfValue' can be obtained from macros defined
 * in the file 'include/armv7a/am335x/pin_mux.h'.\n
 *END*-----------------------------------------------------------*/
-static void GPIOPinMuxSetup(unsigned int offsetAddr, unsigned int padConfValue){
+static void GPIOPinMuxSetup(unsigned int offsetAddr, unsigned int padConfValue)
+{
     HWREG(SOC_CONTROL_REGS + offsetAddr) = (padConfValue);
     HWREG(SOC_CONTROL_REGS + offsetAddr) |= CONTROL_CONF_GPMC_CSN0_CONF_GPMC_CSN0_RXACTIVE;
     HWREG(SOC_CONTROL_REGS + offsetAddr) &= ~(CONTROL_CONF_GPMC_CSN0_CONF_GPMC_CSN0_PUTYPESEL);
@@ -76,7 +80,8 @@ static void GPIOPinMuxSetup(unsigned int offsetAddr, unsigned int padConfValue){
 *
 * \param  baseAdd    The memory address of the GPIO instance being used
 *END*-----------------------------------------------------------*/
-static void GPIOModuleEnable(unsigned int baseAdd){
+static void GPIOModuleEnable(unsigned int baseAdd)
+{
     HWREG(baseAdd + GPIO_CTRL) &= ~(GPIO_CTRL_DISABLEMODULE);
 }
 
@@ -87,10 +92,11 @@ static void GPIOModuleEnable(unsigned int baseAdd){
 * module. It also waits until the reset process is complete.
 *
 * \param  baseAdd    The memory address of the GPIO instance being used
-*END*-----------------------------------------------------------*/
-static void GPIOModuleReset(unsigned int baseAdd){
+*END*-----------------------------------------------------------
+static void GPIOModuleReset(unsigned int baseAdd)
+{
     HWREG(baseAdd + GPIO_SYSCONFIG) |= (GPIO_SYSCONFIG_SOFTRESET);
-}
+}*/
 
 /*FUNCTION*-------------------------------------------------------
 *
@@ -111,11 +117,15 @@ static void GPIOModuleReset(unsigned int baseAdd){
 *END*-----------------------------------------------------------*/
 static void GPIODirModeSet(unsigned int baseAdd,
                             unsigned int pinNumber,
-                            unsigned int pinDirection) {
+                            unsigned int pinDirection) 
+{
     /* Checking if pin is required to be an output pin. */
-    if(DIR_OUTPUT == pinDirection){
+    if(DIR_OUTPUT == pinDirection)
+    {
         HWREG(baseAdd + GPIO_OE) &= ~(1 << pinNumber);
-    }else{
+    }
+    else
+    {
         HWREG(baseAdd + GPIO_OE) |= (1 << pinNumber);
     }
 }
@@ -140,11 +150,15 @@ static void GPIODirModeSet(unsigned int baseAdd,
 *END*-----------------------------------------------------------*/
 void GPIOPinWrite(unsigned int baseAdd,
                             unsigned int pinNumber,
-                            unsigned int pinValue) {
+                            unsigned int pinValue) 
+{
 
-	if(PIN_HIGH == pinValue){
+	if(PIN_HIGH == pinValue)
+    {
 		HWREG(baseAdd + GPIO_SETDATAOUT) = (1 << pinNumber);
-	}else{
+	}
+    else
+    {
 		HWREG(baseAdd + GPIO_CLEARDATAOUT) = (1 << pinNumber);
 	}
 }
@@ -155,7 +169,8 @@ void GPIOPinWrite(unsigned int baseAdd,
 * Function Name : ledInit
 * Comments      :
 *END*-----------------------------------------------------------*/
-int ledInit(int pin, int direction){
+int ledInit(int pin, int direction)
+{
 	int n;
     /* Enabling functional clocks for GPIO1 instance. */
     GPIO1_ModuleClkConfig();
@@ -202,39 +217,14 @@ int ledInit(int pin, int direction){
     GPIOModuleEnable(GPIO_INSTANCE_ADDRESS);
 
     /* Resetting the GPIO module. */
-    GPIOModuleReset(GPIO_INSTANCE_ADDRESS);
-
-    /* Setting the GPIO pin as an output pin. */
+    /*GPIOModuleReset(GPIO_INSTANCE_ADDRESS);
+	removendo p nao interferir nos outros leds
+    Setting the GPIO pin as an output pin. */
     GPIODirModeSet(GPIO_INSTANCE_ADDRESS,
                GPIO_INSTANCE_PIN_NUMBER(pin),
                direction);
     
     return(0);
-}
-
-/*FUNCTION*-------------------------------------------------------
-*
-* Function Name : ledToggle
-* Comments      :
-*END*-----------------------------------------------------------*/
-void ledToggle(int pin){
-    
-    flagToggle^=TOGGLE;
-
-    if(flagToggle)
-    {
-        /* Driving a logic HIGH on the GPIO pin. */
-        GPIOPinWrite(GPIO_INSTANCE_ADDRESS,
-                GPIO_INSTANCE_PIN_NUMBER(pin),
-                PIN_HIGH);
-    }
-    else
-    {
-         /* Driving a logic LOW on the GPIO pin. */
-        GPIOPinWrite(GPIO_INSTANCE_ADDRESS,
-                GPIO_INSTANCE_PIN_NUMBER(pin),
-                PIN_LOW);
-    }
 }
 
 int andar_atual;
@@ -245,7 +235,9 @@ void acender(int andar)
 	GPIOPinWrite(GPIO_INSTANCE_ADDRESS,
                 GPIO_INSTANCE_PIN_NUMBER( elevador[andar] ),
                 PIN_HIGH);
+    delay(MSEG);
 }
+
 
 void apagar(int andar)
 {
@@ -253,13 +245,17 @@ void apagar(int andar)
                 GPIO_INSTANCE_PIN_NUMBER( elevador[andar] ),
                 PIN_LOW);
 	delay(MSEG);
+
 }
 
 int valorbot(unsigned int nGpio)
 {
-	if( HWREG(GPIO_INSTANCE_ADDRESS + GPIO_DATAIN) & (1 << nGpio) ) 
-		return PIN_HIGH;
-	return PIN_LOW;
+	 if(HWREG(GPIO_INSTANCE_ADDRESS + GPIO_DATAIN) & (1 << nGpio)){ 
+        return PIN_HIGH;
+    }
+    else{ 
+        return PIN_LOW;
+    }
 }
 
 void sinal()
@@ -281,6 +277,7 @@ void acender_display(int andar)
             GPIO_INSTANCE_PIN_NUMBER( display[i] ),
             numeros[andar][i] );
 	}
+    delay(MSEG);
 }
 
 static void delay(volatile unsigned int count){
@@ -312,17 +309,22 @@ int exec()
 		{
 			apagar( andar_atual );
 			if( andar_atual > destino )
-				--andar_atual;
+				andar_atual--;
 			else
-				++andar_atual;
+				andar_atual++;
 			acender( andar_atual );
 			acender_display( andar_atual );
 		}
+        acender_display( andar_atual );
 		acender( andar_atual );
-		acender_display( andar_atual );
+		
 
-		sinal();
-	}
+
+
+		sinal();	    
+    }
+
+
 
 	return 0;
 }

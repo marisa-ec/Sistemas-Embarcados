@@ -44,6 +44,32 @@
 #define GPIO_INSTANCE_PIN_NUMBER(n)        (n)
 #define TOGGLE                          (0x01u)
 
+#define ANDAR1 28
+#define ANDAR2 2
+#define ANDAR3 4
+
+#define BOTAO1 16
+#define BOTAO2 17
+#define BOTAO3 18
+
+#define DISPLAYA 13
+#define DISPLAYB 15
+#define DISPLAYC 12
+#define DISPLAYD 14
+#define DISPLAYE 29
+#define DISPLAYF 1
+#define DISPLAYG 0
+
+#define MSEG (0x6FFFFFF)
+
+void init();
+int exec();
+void sinal();
+void apagar(int andar);
+void acender(int andar);
+void acender_display(int andar);
+int valorbot(unsigned int nGpio);
+
 int ledInit();
 void ledToggle();
 typedef enum Pins pins;
